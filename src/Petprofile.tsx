@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
-import './Home.css';
+import './Petprofile.css';
 import profileservice from './ProfileService';
+import {Petinfo} from './Interface';
 import { NavLink} from 'react-router-dom';
 import { Button} from 'reactstrap';
 import { MyNavbar } from './components/MyNavbar';
@@ -12,10 +13,8 @@ import map from './components/img/Map.png';
 import lineunder from './components/img/lineunder.png';
 import User from './components/img/User.png';
 import contact from './components/img/contact.png';
-import {Petinfo} from './Interface';
 
-
-export const Home = () => {
+export const Petprofile = () => {
     const[obj,setObj] = useState<Petinfo>();
 
     const fetchProfileInfo=() =>{
@@ -30,6 +29,7 @@ export const Home = () => {
     useEffect(()=>{
       fetchProfileInfo()
     },[])
+    
     const petname = obj?.PetName;
     const petbreed = obj?.PetBreed;
     const petgender = obj?.PetGender;
@@ -42,33 +42,6 @@ export const Home = () => {
     const petheight = obj?.petHeight;
     const userid = obj?.UserId;
     const adopuserid = obj?.AdopUserId;
-
-    const PetName = (props: any) =>{
-        console.log(props)
-        return(
-            <div>{props.petname}</div>
-        )
-    }
-    const Information = (props:any) =>{
-        console.log(props)
-        return(
-            <div>
-            <p>Type: {props.Type}</p>6
-            <p>Gender: {props.Gender}</p>
-            <p>Weight: {props.Weight}</p>        
-            <p>Size: {props.Size}</p>
-            <p>Color: {props.Color}</p>
-            <p>Breed: {props.Breed}</p>
-            <p>Location:</p>
-            <p>{props.Location}</p>
-            </div>
-            )
-        }
-    const Desc = (props:any) =>{
-        console.log(props)
-            return(
-                <div>{props.Desc}</div>
-            )}
     
     return(
     <div className='font'>
@@ -85,17 +58,25 @@ export const Home = () => {
             <div>-----------</div>
         </div>
         <div className="infoText">
-            <Information className="back" Type="Dog" Gender="Male" Weight="33 Kg" Size="length 50 cm height 70 cm" Color="brown" Breed="หอยทาก" Location="Blablabla" />
             <div className="Column">
-                 <BookmarkModal/>
-                 <CertModal/>
+                <p>Type: {pettype}</p>
+                <p>Gender: {petgender}</p>       
+                <p>Length: {petlength}</p>
+                <p>Height: {petheight}</p>
+                <p>Breed: {petbreed}</p>
+                <p>Location:</p>
+                <p>bla bla</p>
+            </div>
+            <div className="Column">
+                <BookmarkModal/>
+                <CertModal/>
             </div>
         </div>
         <img src={map} className="Map"/>
         
         <div className='Text'>
             <p>Description:</p>
-            <Desc Desc="blablabla"></Desc>
+            {petstatus}
         </div>
         <img src={lineunder} className="lineunder"/>
         <p className='Text'>Post by:</p>
@@ -109,4 +90,4 @@ export const Home = () => {
     );
 }
 
-export default Home;
+export default Petprofile;
